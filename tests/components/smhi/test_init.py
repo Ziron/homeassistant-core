@@ -21,7 +21,7 @@ async def test_setup_entry(
         TEST_CONFIG["location"]["longitude"], TEST_CONFIG["location"]["latitude"]
     )
     aioclient_mock.get(uri, text=api_response)
-    entry = MockConfigEntry(domain=DOMAIN, title="test", data=TEST_CONFIG, version=3)
+    entry = MockConfigEntry(domain=DOMAIN, title="test", data=TEST_CONFIG, version=2)
     entry.add_to_hass(hass)
 
     await hass.config_entries.async_setup(entry.entry_id)
@@ -39,7 +39,7 @@ async def test_remove_entry(
         TEST_CONFIG["location"]["longitude"], TEST_CONFIG["location"]["latitude"]
     )
     aioclient_mock.get(uri, text=api_response)
-    entry = MockConfigEntry(domain=DOMAIN, title="test", data=TEST_CONFIG, version=3)
+    entry = MockConfigEntry(domain=DOMAIN, title="test", data=TEST_CONFIG, version=2)
     entry.add_to_hass(hass)
 
     await hass.config_entries.async_setup(entry.entry_id)
@@ -85,9 +85,15 @@ async def test_migrate_entry(
     state = hass.states.get(entity.entity_id)
     assert state
 
-    assert entry.version == 3
+    assert entry.version == 2
     assert entry.unique_id == "59.32624-17.84197"
-    assert entry.data == TEST_CONFIG
+    assert entry.data == {
+        "location": {
+            "longitude": "17.84197",
+            "latitude": "59.32624",
+        },
+        "name": "test",
+    }
 
     entity_get = entity_registry.async_get(entity.entity_id)
     assert entity_get.unique_id == "59.32624, 17.84197"

@@ -199,7 +199,7 @@ async def test_reconfigure_flow(
         title="Home",
         unique_id="57.2898-13.6304",
         data={"location": {"latitude": 57.2898, "longitude": 13.6304}},
-        version=3,
+        version=2,
     )
     entry.add_to_hass(hass)
 

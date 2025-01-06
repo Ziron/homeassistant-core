@@ -47,9 +47,4 @@ async def async_migrate_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         }
         hass.config_entries.async_update_entry(entry, data=new_data, version=2)
 
-    if entry.version == 2:
-        new_data = entry.data.copy()
-        new_data.pop(CONF_NAME)
-        hass.config_entries.async_update_entry(entry, data=new_data, version=3)
-
     return True
