@@ -107,9 +107,9 @@ async def test_migrate_from_future_version(
         TEST_CONFIG_MIGRATE["longitude"], TEST_CONFIG_MIGRATE["latitude"]
     )
     aioclient_mock.get(uri, text=api_response)
-    entry = MockConfigEntry(domain=DOMAIN, data=TEST_CONFIG_MIGRATE, version=4)
+    entry = MockConfigEntry(domain=DOMAIN, data=TEST_CONFIG_MIGRATE, version=3)
     entry.add_to_hass(hass)
-    assert entry.version == 4
+    assert entry.version == 3
 
     await hass.config_entries.async_setup(entry.entry_id)
     await hass.async_block_till_done()

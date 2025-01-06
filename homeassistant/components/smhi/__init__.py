@@ -33,7 +33,7 @@ async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
 async def async_migrate_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     """Migrate old entry."""
 
-    if entry.version > 3:
+    if entry.version > 2:
         # Downgrade from future version
         return False
 
