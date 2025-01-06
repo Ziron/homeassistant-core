@@ -38,7 +38,7 @@ async def async_check_location(
 class SmhiFlowHandler(ConfigFlow, domain=DOMAIN):
     """Config flow for SMHI component."""
 
-    VERSION = 3
+    VERSION = 2
 
     async def async_step_user(
         self, user_input: dict[str, Any] | None = None
